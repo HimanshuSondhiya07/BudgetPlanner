@@ -4,11 +4,11 @@ import Budget from "./components/Budget";
 import Expense from "./components/Expense";
 
 export const ExpenseContext = createContext(null);
+
 function App() {
   const [budget, setBudget] = useState(2000);
   const [remaining, setRemaining] = useState(2000);
   const [spent, setSpent] = useState(0);
-
   const [expenses, setExpenses] = useState([]);
 
   const addExpense = (name, amount) => {
@@ -22,7 +22,7 @@ function App() {
   };
 
   useEffect(() => {
-    // re calculate the expeses
+    // Recalculate the expenses
     let amount = 0;
     for (let item of expenses) {
       amount += item.amount;
@@ -31,11 +31,11 @@ function App() {
 
     setSpent(amount);
     setRemaining(rm);
-  }, [expenses]);
+  }, [expenses, budget]);
 
   return (
-    <div>
-      <ExpenseContext.Provider value={{ budget, spent, remaining, addExpense }}>
+    <div className="container">
+      <ExpenseContext.Provider value={{ budget, spent, remaining, addExpense, setBudget }}>
         <Budget />
         <AddExpense />
 
@@ -45,6 +45,7 @@ function App() {
             name={item.name}
             deleteExpense={deleteExpense}
             index={index}
+            key={index}
           />
         ))}
       </ExpenseContext.Provider>

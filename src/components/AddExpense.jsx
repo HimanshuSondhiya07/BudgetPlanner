@@ -19,7 +19,7 @@ export default function AddExpense() {
         <input
           value={name}
           onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="title"
+          placeholder="Title"
           type="text"
         />
         <input
